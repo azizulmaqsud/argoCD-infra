@@ -1,3 +1,3 @@
 locals {
-  cluster_name = "oct-24-eks-argo"
+  cluster_name = "nov-24-eks-argo"
 }
