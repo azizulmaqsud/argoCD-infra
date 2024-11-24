@@ -1,7 +1,7 @@
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
-  name = "oct-24-infra"
+  name = "nov-24-infra"
   cidr = "10.10.0.0/16"
 
   azs             = ["us-east-1a", "us-east-1b", "us-east-1c"]
