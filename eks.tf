@@ -74,6 +74,6 @@ resource "aws_iam_policy" "additional" {
   })
 }
 
-# resource "aws_iam_service_linked_role" "elasticloadbalancing" {
-#   aws_service_name = "elasticloadbalancing.amazonaws.com"
-# }
+resource "aws_iam_service_linked_role" "elasticloadbalancing" {
+  aws_service_name = "elasticloadbalancing.amazonaws.com"
+}
