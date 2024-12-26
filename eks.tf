@@ -3,7 +3,7 @@ module "eks" {
   version = "19.15.4"
 
   cluster_name    = local.cluster_name
-  cluster_version = "1.29"
+  cluster_version = "1.27"
 
   vpc_id                         = module.vpc.vpc_id
   subnet_ids                     = module.vpc.private_subnets
@@ -26,8 +26,9 @@ module "eks" {
       max_size     = 3
       desired_size = 2
     }
+  }
 }
-}
+
 data "aws_iam_policy" "ebs_csi_policy" {
   arn = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
 }
@@ -74,6 +75,9 @@ resource "aws_iam_policy" "additional" {
   })
 }
 
-resource "aws_iam_service_linked_role" "elasticloadbalancing" {
-  aws_service_name = "elasticloadbalancing.amazonaws.com"
+resource "aws_iam_role_policy" "additional_policy" {
+  name   = "${local.cluster_name}-additional"
+  role   = module.eks.eks_managed_node_groups["one"].iam_role_name
+  policy = aws_iam_policy.additional.policy
 }
+
